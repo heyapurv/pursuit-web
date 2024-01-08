@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symmetrical Water Drops Animation</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #222;
+        }
+
+        .drop-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .drop {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: cyan;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: fall 4s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(300px) rotate(360deg);
+            }
+            100% {
+                transform: translateY(600px) rotate(720deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="drop-container">
+        <!-- JavaScript to create and append drops dynamically -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                for (let i = 0; i < 36 ; i++) { // Creating 1 drop for symmetry
+                    createDrop(i);
+                }
+            });
+
+            function createDrop(index) {
+                const angle = (index * 10) * (Math.PI / 180);
+                const radius = 150;
+                const x = Math.cos(angle) * radius + 150;
+                const y = Math.sin(angle) * radius + 150;
+
+                const drop = document.createElement("div");
+                drop.className = "drop";
+                drop.style.left = x + "px";
+                drop.style.top = y + "px";
+                document.body.appendChild(drop);
+            }
+        </script>
+    </div>
+</body>
+</html>
